@@ -1,0 +1,3 @@
+C:\Users\Carlos Montoya\Desktop\BackRobotTDM\bSID\obj\Debug\bSID.csproj.AssemblyReference.cache
+C:\Users\Carlos Montoya\Desktop\BackRobotTDM\bSID\obj\Debug\bSID.csproj.SuggestedBindingRedirects.cache
+C:\Users\Carlos Montoya\Desktop\BackRobotTDM\bSID\obj\Debug\bSID.csproj.CoreCompileInputs.cache
