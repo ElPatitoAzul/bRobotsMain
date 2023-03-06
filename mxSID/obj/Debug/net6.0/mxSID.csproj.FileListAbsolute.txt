@@ -32,3 +32,20 @@ C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\mxSID\obj\Debug\net6.0
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\mxSID\obj\Debug\net6.0\refint\mxSID.dll
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.pdb
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\mxSID\obj\Debug\net6.0\ref\mxSID.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\bin\Debug\net6.0\mxSID.deps.json
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\bin\Debug\net6.0\mxSID.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\bin\Debug\net6.0\mxSID.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\bin\Debug\net6.0\Modelos.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\bin\Debug\net6.0\ModelsNEnums.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\bin\Debug\net6.0\Modelos.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\bin\Debug\net6.0\ModelsNEnums.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.csproj.AssemblyReference.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.AssemblyInfoInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.AssemblyInfo.cs
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.csproj.CopyComplete
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\refint\mxSID.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\mxSID.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\mxSID\obj\Debug\net6.0\ref\mxSID.dll

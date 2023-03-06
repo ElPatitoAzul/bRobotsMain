@@ -14,7 +14,7 @@ namespace BackRobotTDM.Controllers
     [Route("api/peticiones/rfcs")]
     public class PeticionesRFCsController : Controller
     {
-
+        private static Semaphore semaphore = new Semaphore(1, 1);
         private readonly EF_DataContext DB;
         private readonly SAT.Main _sat = new SAT.Main();
 
@@ -57,6 +57,7 @@ namespace BackRobotTDM.Controllers
         [Route("fisica/new")]
         public async Task<IActionResult> FisicPerson([FromBody] Requests DATA)
         {
+
             var _robot = await DB.RobotsUsage.Where(d => d.Source == "rfcs" && d.System == "sat" && d.AccessToken != null && d.Status == "Ok").FirstOrDefaultAsync();
 
             if (_robot != null)
@@ -75,12 +76,12 @@ namespace BackRobotTDM.Controllers
                     _req.Id = Guid.NewGuid();
                     var seed = Environment.TickCount;
                     var random = new Random(seed);
-                    int n = random.Next(1, 4);
-                    Thread.Sleep(n * 1000);
+                    PeticionesRFCsController.semaphore.WaitOne();
                     var _result = _sat.byDataFisica(_req);
+                    PeticionesRFCsController.semaphore.Release();
 
                     _peticion.Search = DATA.RFC != "" || DATA.RFC != null ? "RFC" : "CURP";
-                    _peticion.CURP = DATA.CURP != "" || DATA.CURP != null ? DATA.CURP: _result.CURP;
+                    _peticion.CURP = DATA.CURP != "" || DATA.CURP != null ? DATA.CURP : _result.CURP;
                     _peticion.RFC = DATA.RFC != "" || DATA.RFC != null ? DATA.RFC : _result.RFC;
                     _peticion.CreatedAt = DateTime.UtcNow;
                     _peticion.Id = _req.Id;
@@ -110,7 +111,8 @@ namespace BackRobotTDM.Controllers
                         });
                     }
 
-                    else {
+                    else
+                    {
                         _robot.AccessToken = JsonConvert.SerializeObject(_result.NewToken);
                         DB.SaveChanges();
 
@@ -135,13 +137,14 @@ namespace BackRobotTDM.Controllers
                             _result.CIUDAD,
                             _result.Estado
                         });
-                    } 
+                    }
                 }
 
             }
-            else return NotFound(new {
+            else return NotFound(new
+            {
                 message = "Sin sistema"
-                        });
+            });
         }
 
         [HttpPost]
