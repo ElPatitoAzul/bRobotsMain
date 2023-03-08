@@ -22,3 +22,15 @@ C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\GeneralTools\obj\Relea
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\GeneralTools\obj\Release\net6.0\refint\GeneralTools.dll
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\GeneralTools\obj\Release\net6.0\GeneralTools.pdb
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\GeneralTools\obj\Release\net6.0\ref\GeneralTools.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\bin\Release\net6.0\GeneralTools.deps.json
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\bin\Release\net6.0\GeneralTools.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\bin\Release\net6.0\GeneralTools.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\GeneralTools.csproj.AssemblyReference.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\GeneralTools.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\GeneralTools.AssemblyInfoInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\GeneralTools.AssemblyInfo.cs
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\GeneralTools.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\GeneralTools.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\refint\GeneralTools.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\GeneralTools.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\GeneralTools\obj\Release\net6.0\ref\GeneralTools.dll

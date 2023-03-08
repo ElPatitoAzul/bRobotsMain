@@ -34,3 +34,15 @@ C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\Modelos\obj\Release\ne
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\Modelos\obj\Release\net6.0\refint\Modelos.dll
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\Modelos\obj\Release\net6.0\Modelos.pdb
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\Modelos\obj\Release\net6.0\ref\Modelos.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\bin\Release\net6.0\Modelos.deps.json
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\bin\Release\net6.0\Modelos.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\bin\Release\net6.0\Modelos.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\Modelos.csproj.AssemblyReference.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\Modelos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\Modelos.AssemblyInfoInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\Modelos.AssemblyInfo.cs
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\Modelos.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\Modelos.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\refint\Modelos.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\Modelos.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\Modelos\obj\Release\net6.0\ref\Modelos.dll

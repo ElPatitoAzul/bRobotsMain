@@ -49,3 +49,20 @@ C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\SAT\obj\Release\net6.0
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\SAT\obj\Release\net6.0\refint\SAT.dll
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\SAT\obj\Release\net6.0\SAT.pdb
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\SAT\obj\Release\net6.0\ref\SAT.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\bin\Release\net6.0\SAT.deps.json
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\bin\Release\net6.0\SAT.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\bin\Release\net6.0\SAT.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\bin\Release\net6.0\Modelos.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\bin\Release\net6.0\ModelsNEnums.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\bin\Release\net6.0\Modelos.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\bin\Release\net6.0\ModelsNEnums.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\SAT.csproj.AssemblyReference.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\SAT.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\SAT.AssemblyInfoInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\SAT.AssemblyInfo.cs
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\SAT.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\SAT.csproj.CopyComplete
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\SAT.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\refint\SAT.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\SAT.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\SAT\obj\Release\net6.0\ref\SAT.dll

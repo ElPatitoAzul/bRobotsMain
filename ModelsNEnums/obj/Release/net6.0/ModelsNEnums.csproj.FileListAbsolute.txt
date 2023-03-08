@@ -34,3 +34,15 @@ C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\ModelsNEnums\obj\Relea
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\ModelsNEnums\obj\Release\net6.0\refint\ModelsNEnums.dll
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ModelsNEnums.pdb
 C:\Users\Alexander Culebro\Desktop\bRobotsTDM\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ref\ModelsNEnums.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\bin\Release\net6.0\ModelsNEnums.deps.json
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\bin\Release\net6.0\ModelsNEnums.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\bin\Release\net6.0\ModelsNEnums.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ModelsNEnums.csproj.AssemblyReference.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ModelsNEnums.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ModelsNEnums.AssemblyInfoInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ModelsNEnums.AssemblyInfo.cs
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ModelsNEnums.csproj.CoreCompileInputs.cache
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ModelsNEnums.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\refint\ModelsNEnums.dll
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ModelsNEnums.pdb
+C:\Users\pc\Documents\Repos\backend\bRobotsMain\ModelsNEnums\obj\Release\net6.0\ref\ModelsNEnums.dll

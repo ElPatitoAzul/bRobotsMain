@@ -14,6 +14,7 @@ namespace BackRobotTDM.Controllers
     [Route("api/peticiones/rfcs")]
     public class PeticionesRFCsController : Controller
     {
+        private static Boolean inUse = false;
         private static Semaphore semaphore = new Semaphore(1, 1);
         private readonly EF_DataContext DB;
         private readonly SAT.Main _sat = new SAT.Main();
@@ -57,28 +58,40 @@ namespace BackRobotTDM.Controllers
         [Route("fisica/new")]
         public async Task<IActionResult> FisicPerson([FromBody] Requests DATA)
         {
-
+            PeticionesRFCsController.semaphore.WaitOne();
+            while (inUse)
+            { Console.WriteLine("Robot en uso");  }
             var _robot = await DB.RobotsUsage.Where(d => d.Source == "rfcs" && d.System == "sat" && d.AccessToken != null && d.Status == "Ok").FirstOrDefaultAsync();
+
+
 
             if (_robot != null)
             {
+                inUse = true;
                 lock (_robot)
                 {
-                    var _peticion = new Modelos.SAT.PeticionesRFCModel();
-                    var _req = new Modelos.SAT.Work();
-                    var _access = JsonConvert.DeserializeObject<Modelos.SAT.Access>(_robot.AccessToken!);
+                    // Crear los modelos
+                    var _peticion = new PeticionesRFCModel();
+                    var _req = new Work();
+
+                    var _access = JsonConvert.DeserializeObject<Access>(_robot.AccessToken!);
 
                     _req.COOKIES = _access?.Cookie!;
                     _req.VIEW_STATE = _access?.ViewState!;
+
                     _req.CURP = DATA.CURP;
                     _req.RFC = DATA.RFC;
                     _req.UserId = DATA.UserId;
                     _req.Id = Guid.NewGuid();
+
+
+                    // Temporal (LO TIENEN QUE CAMBIAR)
                     var seed = Environment.TickCount;
                     var random = new Random(seed);
-                    PeticionesRFCsController.semaphore.WaitOne();
+
+
                     var _result = _sat.byDataFisica(_req);
-                    PeticionesRFCsController.semaphore.Release();
+                    inUse = false;
 
                     _peticion.Search = DATA.RFC != "" || DATA.RFC != null ? "RFC" : "CURP";
                     _peticion.CURP = DATA.CURP != "" || DATA.CURP != null ? DATA.CURP : _result.CURP;
@@ -95,6 +108,7 @@ namespace BackRobotTDM.Controllers
                         _robot.AccessToken = null;
                         _robot.Status = "Off";
                         DB.SaveChanges();
+                        PeticionesRFCsController.semaphore.Release();
                         return BadRequest("Token caducado");
                     }
                     else if (!_result.Found)
@@ -105,6 +119,7 @@ namespace BackRobotTDM.Controllers
                         _peticion.Comments = "No se han encontrado resultados de búsqueda.";
 
                         DB.PeticionesRFC.Add(_peticion);
+                        PeticionesRFCsController.semaphore.Release();
                         return NotFound(new
                         {
                             message = "No se han encontrado resultados de búsqueda."
@@ -127,6 +142,7 @@ namespace BackRobotTDM.Controllers
                         _peticion.RFC = _result.RFC;
                         DB.PeticionesRFC.Add(_peticion);
                         DB.SaveChanges();
+                        PeticionesRFCsController.semaphore.Release();
                         return Ok(new
                         {
                             _peticion.Id,

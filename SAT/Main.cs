@@ -19,11 +19,6 @@ namespace SAT
         }
 
 
-
-
-
-
-
         public async Task<string> SearchByCurp(string COOKIES, string VIEW_STATE, string CURP)
         {
             try
@@ -106,8 +101,6 @@ namespace SAT
 
         }
 
-
-
         private async Task INIT()
         {
             //Enviroment
@@ -167,16 +160,14 @@ namespace SAT
             }
         }
 
-
-
-
+        // Eliminar lo de arriba
         public Search byDataFisica(Work _req)
         {
             var _returns = new Search();
             try
             {
-
                 var _visor = _web.Visor(_req.COOKIES).Result;
+
                 var _newHeaders = _tool.ManipulateHeader(_visor.Headers);
                 var _visorContent = _tool.StringHTML(_visor.Content.ReadAsStringAsync().Result);
                 var _viewStateVisor = _visorContent.GetElementbyId("javax.faces.ViewState").GetAttributes("value").FirstOrDefault()?.Value;
@@ -276,7 +267,6 @@ namespace SAT
                         if (_str.Contains("PDF"))
                         {
                             var _path = @$"cache/rfcs/{_req.Id}-{rfc}.pdf";
-
                             var fs = new FileStream(_path, FileMode.CreateNew);
                             _onDownload.Content.CopyToAsync(fs).Wait();
                             fs.Close();
@@ -285,7 +275,6 @@ namespace SAT
                             _returns.CorteId = _addCorte.id;
                             _returns.Download = true;
                             _returns.Estado = _estado;
-
                             var _cookiesDwn = _tool.ManipulateHeader(_onDownload.Headers);
                             var _newAccess = new Access
                             {
