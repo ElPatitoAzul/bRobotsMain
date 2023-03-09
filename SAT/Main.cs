@@ -329,5 +329,175 @@ namespace SAT
         }
 
 
+        public Search byDataMoral(WorkMoral _req)
+        {
+            var _returns = new Result.Search();
+            try
+            {
+                var _visor = _web.Visor(_req.COOKIES!).Result;
+                var _newHeaders = _tool.ManipulateHeader(_visor?.Headers!);
+                var _visorContent = _tool.StringHTML(_visor.Content.ReadAsStringAsync().Result);
+                var _viewStateVisor = _visorContent?.GetElementbyId("javax.faces.ViewState")?.GetAttributes("value")?.FirstOrDefault()?.Value;
+
+                var _newCookies = _tool.ReplaceCookie(_req.COOKIES!, "F5-CONTENCION-rfcampe-443", _tool.FindCookieValue(_newHeaders.SetCookie, "F5-CONTENCION-rfcampe-443"));
+                _newCookies = _tool.ReplaceCookie(_newCookies, "RFC_AMP_CUE_CONT_9080_e", _tool.FindCookieValue(_newHeaders.SetCookie, "RFC_AMP_CUE_CONT_9080_e"));
+
+                _req.COOKIES = _newCookies;
+                _req.VIEW_STATE = _viewStateVisor;
+
+                var _clickRBtn = _web.ClickMoral(_req);
+                var _clickRBtnHeaders = _clickRBtn.Headers;
+                var _clickRBtnContent = _clickRBtn.Content.ReadAsStringAsync().Result;
+
+                try
+                {
+                    var _clickRBtnCookies = _tool.ManipulateHeader(_clickRBtnHeaders);
+                    var _clickRBtnViewState = _tool.StringHTML(_clickRBtnContent).GetElementbyId("javax.faces.ViewState").InnerHtml;
+                    _newCookies = _tool.ReplaceCookie(_newCookies, "F5-CONTENCION-rfcampe-443", _tool.FindCookieValue(_clickRBtnCookies.SetCookie, "F5-CONTENCION-rfcampe-443"));
+                    _newCookies = _tool.ReplaceCookie(_newCookies, "RFC_AMP_CUE_CONT_9080_e", _tool.FindCookieValue(_clickRBtnCookies.SetCookie, "RFC_AMP_CUE_CONT_9080_e"));
+
+                    _req.COOKIES = _newCookies;
+                    _req.VIEW_STATE = _tool.ManipulateCDATA(_clickRBtnViewState);
+
+                    var _result = _web.BuscarMoral(_req);
+                    var _headers = _result.Headers;
+                    var _cookiesSearch = _tool.ManipulateHeader(_headers);
+
+                    _newCookies = _tool.ReplaceCookie(_newCookies, "F5-CONTENCION-rfcampe-443", _tool.FindCookieValue(_cookiesSearch.SetCookie, "F5-CONTENCION-rfcampe-443"));
+                    _newCookies = _tool.ReplaceCookie(_newCookies, "RFC_AMP_CUE_CONT_9080_e", _tool.FindCookieValue(_cookiesSearch.SetCookie, "RFC_AMP_CUE_CONT_9080_e"));
+
+                    var _content = _result.Content.ReadAsStringAsync().Result;
+                    if (_content.Contains("expires"))
+                    {
+                        _returns.ValidToken = false;
+                        return _returns;
+                    }
+                    else
+                    {
+                        var _html = _tool.StringHTML(_content);
+
+
+                        try
+                        {
+                            var _table = _tool.StringHTML(_html.GetElementbyId("visorForm:tablaResultados_data")?.InnerHtml!);
+                            var _tds = _table?.DocumentNode.SelectNodes("//td");
+                            var _resultViewState = _tool.ManipulateCDATA(_html.GetElementbyId("javax.faces.ViewState")?.InnerHtml);
+
+                            for (var i = 0; i < _tds.ToArray().Length-2; i++)
+                            {
+                                switch(i)
+                                {
+                                    case 0:
+                                        _returns.Names = _tds[i].InnerText;
+                                        break;
+                                    case 1:
+                                        _returns.RFC = _tds[i].InnerText;
+                                        break;
+                                    case 2:
+                                        _returns.CIUDAD = _tds[i].InnerText;
+                                        _returns.Estado = _tool.STATE(_tds[i].InnerText);
+                                        break;
+                                }
+
+
+                                //var _label = _tds[i].SelectSingleNode("//label");
+                                //var _id = _label.GetAttributes("id").FirstOrDefault().Value;
+                                //if (_id.Contains("resRazonSoc"))
+                                //{
+                                //    _returns.Names = _label.InnerHtml;
+                                //}
+                                //else if (_id.Contains("0:j_idt64"))
+                                //{
+                                //    _returns.RFC = _label.InnerHtml;
+                                //}
+                                //else if (_id.Contains("0:j_idt67"))
+                                //{
+                                //    _returns.CIUDAD = _label.InnerHtml;
+                                //    _returns.Estado = _tool.STATE(_label.InnerHtml);
+                                //}
+                                //else if (_id.Contains("0:j_idt69"))
+                                //{
+                                //    _returns.Apellidos = _label.InnerHtml;
+                                //}
+                            }
+
+                            var _clickRfc = _web.ClickRFCMoral(_newCookies, _resultViewState, _returns.RFC).Result;
+                            var _clickRfcStr = _clickRfc.Content.ReadAsStringAsync().Result;
+                            var _clickRfcCookies = _tool.ManipulateHeader(_clickRfc.Headers);
+
+                            _newCookies = _tool.ReplaceCookie(_newCookies, "F5-CONTENCION-rfcampe-443", _tool.FindCookieValue(_clickRfcCookies.SetCookie, "F5-CONTENCION-rfcampe-443"));
+                            _newCookies = _tool.ReplaceCookie(_newCookies, "RFC_AMP_CUE_CONT_9080_e", _tool.FindCookieValue(_clickRfcCookies.SetCookie, "RFC_AMP_CUE_CONT_9080_e"));
+
+                            var _onInit = _web.InitVisualizador(_newCookies).Result;
+                            var _onInitCookies = _tool.ManipulateHeader(_onInit.Headers);
+                            var _onInitStr = _onInit.Content.ReadAsStringAsync().Result;
+                            _newCookies = _tool.ReplaceCookie(_newCookies, "F5-CONTENCION-rfcampe-443", _tool.FindCookieValue(_onInitCookies.SetCookie, "F5-CONTENCION-rfcampe-443"));
+                            _newCookies = _tool.ReplaceCookie(_newCookies, "RFC_AMP_CUE_CONT_9080_e", _tool.FindCookieValue(_onInitCookies.SetCookie, "RFC_AMP_CUE_CONT_9080_e"));
+                            var _onResume = _web.HTMLResumen(_newCookies).Result;
+                            var _onResumeStr = _onResume.Content.ReadAsStringAsync().Result;
+                            var _onResumeCookies = _tool.ManipulateHeader(_onResume.Headers);
+                            var _onResumeHTML = _tool.StringHTML(_onResumeStr);
+                            var _onResumeView = _onResumeHTML.GetElementbyId("javax.faces.ViewState").InnerHtml;
+                            var _sourceResume = _tool.ManipulateCDATA(_onResumeView);
+                            _newCookies = _tool.ReplaceCookie(_newCookies, "F5-CONTENCION-rfcampe-443", _tool.FindCookieValue(_onResumeCookies.SetCookie, "F5-CONTENCION-rfcampe-443"));
+                            _newCookies = _tool.ReplaceCookie(_newCookies, "RFC_AMP_CUE_CONT_9080_e", _tool.FindCookieValue(_onResumeCookies.SetCookie, "RFC_AMP_CUE_CONT_9080_e"));
+                            var _onResumenTrib = _web.ResumenTributario(_newCookies, _sourceResume!).Result;
+                            var _onResumenTribStr = _onResumenTrib.Content.ReadAsStringAsync().Result;
+                            var _onResumenTribCookies = _tool.ManipulateHeader(_onResumenTrib.Headers);
+                            _newCookies = _tool.ReplaceCookie(_newCookies, "F5-CONTENCION-rfcampe-443", _tool.FindCookieValue(_onResumenTribCookies.SetCookie, "F5-CONTENCION-rfcampe-443"));
+                            _newCookies = _tool.ReplaceCookie(_newCookies, "RFC_AMP_CUE_CONT_9080_e", _tool.FindCookieValue(_onResumenTribCookies.SetCookie, "RFC_AMP_CUE_CONT_9080_e"));
+                            var _onDownload = _web.DownloadRFC(_newCookies, $"{_req.Id}-{_returns.RFC}.pdf").Result;
+                            var _str = _onDownload.Content.ReadAsStringAsync().Result;
+                            if (_str.Contains("PDF"))
+                            {
+
+                                var _path = @$"cache/rfcs/{_req.Id}-{_returns.RFC}.pdf";
+                                var fs = new FileStream(_path, FileMode.CreateNew);
+                                _onDownload.Content.CopyToAsync(fs).Wait();
+                                fs.Close();
+
+                                var _corte = _web.ADD_CORTE(_returns.RFC, "Registro Federal de Contribuyentes", _req.UserId.ToString(), $"{_req.Id}-{_returns.RFC}.pdf", $"{_returns.Names}", _returns.Estado).Result;
+                                var _addCorte = JsonConvert.DeserializeObject<Modelos.Corte.AddCorte>(_corte);
+                                _returns.CorteId = _addCorte.id;
+                                _returns.Download = true;
+                                var _cookiesDwn = _tool.ManipulateHeader(_onDownload.Headers);
+                                var _newAccess = new Access
+                                {
+                                    Cookie = _newCookies,
+                                    ViewState = _viewStateVisor!
+                                };
+
+
+                                _returns.NewToken = _newAccess;
+                                _returns.Found = true;
+                                _returns.ValidToken = true;
+                                return _returns;
+                            }
+                            return _returns;
+
+                        }
+                        catch
+                        {
+                            _returns.Found = false;
+                            _returns.ValidToken = true;
+                            return _returns;
+                        }
+
+
+                    }
+                }
+                catch
+                {
+                    _returns.ValidToken = false;
+                    return _returns;
+                }
+            }
+            catch
+            {
+                _returns.ValidToken = false;
+                return _returns;
+            }
+        }
+
     }
 }

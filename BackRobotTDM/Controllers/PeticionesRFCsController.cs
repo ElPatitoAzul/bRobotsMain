@@ -15,7 +15,6 @@ namespace BackRobotTDM.Controllers
     public class PeticionesRFCsController : Controller
     {
         private static Boolean inUse = false;
-        private static Semaphore semaphore = new Semaphore(1, 1);
         private readonly EF_DataContext DB;
         private readonly SAT.Main _sat = new SAT.Main();
 
@@ -58,15 +57,16 @@ namespace BackRobotTDM.Controllers
         [Route("fisica/new")]
         public async Task<IActionResult> FisicPerson([FromBody] Requests DATA)
         {
-            PeticionesRFCsController.semaphore.WaitOne();
-            while (inUse)
-            { Console.WriteLine("Robot en uso");  }
+     
             var _robot = await DB.RobotsUsage.Where(d => d.Source == "rfcs" && d.System == "sat" && d.AccessToken != null && d.Status == "Ok").FirstOrDefaultAsync();
 
 
 
             if (_robot != null)
             {
+                while (inUse)
+                { Console.WriteLine("Robot en uso"); }
+
                 inUse = true;
                 lock (_robot)
                 {
@@ -108,7 +108,6 @@ namespace BackRobotTDM.Controllers
                         _robot.AccessToken = null;
                         _robot.Status = "Off";
                         DB.SaveChanges();
-                        PeticionesRFCsController.semaphore.Release();
                         return BadRequest("Token caducado");
                     }
                     else if (!_result.Found)
@@ -119,7 +118,6 @@ namespace BackRobotTDM.Controllers
                         _peticion.Comments = "No se han encontrado resultados de búsqueda.";
 
                         DB.PeticionesRFC.Add(_peticion);
-                        PeticionesRFCsController.semaphore.Release();
                         return NotFound(new
                         {
                             message = "No se han encontrado resultados de búsqueda."
@@ -142,7 +140,6 @@ namespace BackRobotTDM.Controllers
                         _peticion.RFC = _result.RFC;
                         DB.PeticionesRFC.Add(_peticion);
                         DB.SaveChanges();
-                        PeticionesRFCsController.semaphore.Release();
                         return Ok(new
                         {
                             _peticion.Id,
@@ -167,7 +164,77 @@ namespace BackRobotTDM.Controllers
         [Route("moral/new")]
         public IActionResult MoralPerson(MoralRequest DATA)
         {
-            return Ok("Moral");
+            var _robot = DB.RobotsUsage.Where(d => d.Source == "rfcs" && d.System == "sat" && d.AccessToken != null && d.Status=="Ok").FirstOrDefaultAsync().Result;
+            if (_robot != null)
+            {
+                while (inUse) { Console.WriteLine("Robot en uso"); }
+                inUse = true;
+                var _peticion = new PeticionesRFCModel();
+                var _req = new WorkMoral();
+                var _access = JsonConvert.DeserializeObject<Modelos.SAT.Access>(_robot.AccessToken!);
+                _req.COOKIES = _access?.Cookie!;
+                _req.VIEW_STATE = _access?.ViewState!;
+                _req.RFC = DATA.RFC;
+                _req.UserId = DATA.UserId;
+                _req.Id = Guid.NewGuid();
+                var _result = _sat.byDataMoral(_req);
+                inUse = false;
+                _peticion.Search = "RFC";
+                _peticion.RFC = DATA.RFC != "" || DATA.RFC != null ? DATA.RFC : _result.RFC;
+                _peticion.CreatedAt = DateTime.UtcNow;
+                _peticion.Id = _req.Id;
+                _peticion.UserId = _req.UserId;
+                _peticion.UserIp = DATA.UserIp;
+                _peticion.Type = "MORAL";
+                _peticion.RobotTaken = _robot.Name;
+                if (!_result.ValidToken)
+                {
+                    _robot.AccessToken = null;
+                    _robot.Status = "Off";
+                    DB.SaveChanges();
+                    return BadRequest("Token caducado");
+                }
+                else if (!_result.Found)
+                {
+                    _robot.AccessToken = JsonConvert.SerializeObject(_result.NewToken);
+                    DB.SaveChanges();
+
+                    _peticion.Comments = "No se han encontrado resultados de búsqueda.";
+
+                    DB.PeticionesRFC.Add(_peticion);
+                    return NotFound(new
+                    {
+                        message = "No se han encontrado resultados de búsqueda."
+                    });
+                }
+
+                else
+                {
+                    _robot.AccessToken = JsonConvert.SerializeObject(_result.NewToken);
+                    DB.SaveChanges();
+
+                    _peticion.RegId = _result.CorteId;
+                    _peticion.Nombres = _result.Names;
+                    _peticion.Apellidos = "";
+                    _peticion.Comments = "Descargado";
+                    _peticion.Filename = $"{_req.Id}-{_result.RFC}.pdf";
+                    _peticion.Ciudad = _result.CIUDAD;
+                    _peticion.Estado = _result.Estado;
+                    _peticion.CURP = "";
+                    _peticion.RFC = _result.RFC;
+                    DB.PeticionesRFC.Add(_peticion);
+                    DB.SaveChanges();
+                    return Ok(new
+                    {
+                        _peticion.Id,
+                        Nombres = _result.Names,
+                        _result.RFC,
+                        _result.CIUDAD,
+                        _result.Estado
+                    });
+                }
+            }
+            else return BadRequest("Sin robots");
         }
 
         [HttpGet]
