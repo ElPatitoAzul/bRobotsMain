@@ -225,6 +225,17 @@ namespace BackRobotTDM.Controllers
                     AccessToken = _scty.Decrypt(_robotUsage.AccessToken!)
                 };
 
+                // Validacion cadena
+                if(_req.Search == "CADENA")
+                {
+                    if (_req.Data[0] == '1') _req.Type = "NACIMIENTO";
+                    else if (_req.Data[0] == '2') _req.Type = "DIVORCIO";
+                    else if (_req.Data[0] == '3') _req.Type = "MATRIMONIO";
+                    else if (_req.Data[0] == '4') _req.Type = "DEFUNCION";
+                }
+
+
+
                 if (_dRobot.Version == "2")
                 {
                     _result = await _mxSID.MAIN(_req, _dRobot);

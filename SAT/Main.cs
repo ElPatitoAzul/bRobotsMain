@@ -13,6 +13,7 @@ namespace SAT
     {
         private readonly static WebServices _web = new WebServices();
         private readonly static Tools _tool = new Tools(); 
+        private Boolean flag = false;
         public async Task RFC()
         {
             await INIT();
@@ -379,7 +380,22 @@ namespace SAT
 
                         try
                         {
-                            var _table = _tool.StringHTML(_html.GetElementbyId("visorForm:tablaResultados_data")?.InnerHtml!);
+                            var _tableStr = _html.GetElementbyId("visorForm:tablaResultados_data")?.InnerHtml!;
+                            if(_tableStr.Contains("No hay resultados."))
+                            {
+                                _returns.Found = false;
+                                _returns.ValidToken = true;
+
+                                var _cookiesDwn = _tool.ManipulateHeader(_result.Headers);
+                                var _newAccess = new Access
+                                {
+                                    Cookie = _newCookies,
+                                    ViewState = _viewStateVisor!
+                                };
+                                _returns.NewToken = _newAccess;
+                                return _returns;
+                            }
+                            var _table = _tool.StringHTML(_tableStr);
                             var _tds = _table?.DocumentNode.SelectNodes("//td");
                             var _resultViewState = _tool.ManipulateCDATA(_html.GetElementbyId("javax.faces.ViewState")?.InnerHtml);
 
@@ -392,33 +408,21 @@ namespace SAT
                                         break;
                                     case 1:
                                         _returns.RFC = _tds[i].InnerText;
+                                        if (_tds[i].InnerText == null)
+                                        {
+                                            flag = true;
+                                        }
                                         break;
                                     case 2:
                                         _returns.CIUDAD = _tds[i].InnerText;
                                         _returns.Estado = _tool.STATE(_tds[i].InnerText);
                                         break;
                                 }
+                            }
 
-
-                                //var _label = _tds[i].SelectSingleNode("//label");
-                                //var _id = _label.GetAttributes("id").FirstOrDefault().Value;
-                                //if (_id.Contains("resRazonSoc"))
-                                //{
-                                //    _returns.Names = _label.InnerHtml;
-                                //}
-                                //else if (_id.Contains("0:j_idt64"))
-                                //{
-                                //    _returns.RFC = _label.InnerHtml;
-                                //}
-                                //else if (_id.Contains("0:j_idt67"))
-                                //{
-                                //    _returns.CIUDAD = _label.InnerHtml;
-                                //    _returns.Estado = _tool.STATE(_label.InnerHtml);
-                                //}
-                                //else if (_id.Contains("0:j_idt69"))
-                                //{
-                                //    _returns.Apellidos = _label.InnerHtml;
-                                //}
+                            if (flag)
+                            {
+                                return _returns;
                             }
 
                             var _clickRfc = _web.ClickRFCMoral(_newCookies, _resultViewState, _returns.RFC).Result;

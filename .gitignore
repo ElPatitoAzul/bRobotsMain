@@ -55,4 +55,5 @@ SAT/obj/SAT.csproj.nuget.dgspec.json
 BackRobotTDM/obj/Debug/net6.0/BackRobotTDM.csproj.AssemblyReference.cache
 SAT/obj/Debug/net6.0/SAT.assets.cache
 SAT/obj/Debug/net6.0/SAT.csproj.AssemblyReference.cache
+BackrobotTDM/cache/*.pdf
 BackrobotTDM/cache/rfcs/*.pdf

@@ -46,6 +46,7 @@ namespace BackRobotTDM.mSID
                 string id = idContent.Split('\n')[1];
                 var statePlace = text.IndexOf("Acta de Nacimiento");
                 var statePlaceEnd = text.IndexOf("Municipio de Registro");
+                if (statePlaceEnd == -1) return src;
                 var stateSub = text.Substring(statePlace + "Acta de Nacimiento".Length, statePlaceEnd);
                 string state = estado;
 
@@ -84,6 +85,7 @@ namespace BackRobotTDM.mSID
                 string id = idContent.Split('\n')[1];
                 var statePlace = text.IndexOf("Acta de Defunción");
                 var statePlaceEnd = text.IndexOf("Municipio de Registro");
+                if (statePlaceEnd == -1) return src;
                 var stateSub = text.Substring(statePlace + "Acta de Defunción".Length, statePlaceEnd);
                 string state = estado;
                 var curpPlace = text.IndexOf("Clave Única de Registro de Población");
@@ -120,6 +122,7 @@ namespace BackRobotTDM.mSID
                 string id = idContent.Split('\n')[1];
                 var statePlace = text.IndexOf("Entidad de Registro");
                 var statePlaceEnd = text.IndexOf("Municipio de Registro");
+                if (statePlaceEnd == -1) return src;
                 var stateSub = text.Substring(statePlace + "Entidad de Registro".Length, statePlaceEnd);
                 string state = estado;
                 if (prefType == Modelos.Preferences.Foliado)
@@ -152,6 +155,7 @@ namespace BackRobotTDM.mSID
                 string id = idContent.Split('\n')[1];
                 var statePlace = text.IndexOf("Acta de Divorcio");
                 var statePlaceEnd = text.IndexOf("Municipio:");
+                if (statePlaceEnd == -1) return src;
                 var stateSub = text.Substring(statePlace + "Acta de Divorcio".Length, statePlaceEnd);
                 string[] dataSplit = stateSub.Split('\n');
                 string stateTextdel = dataSplit[0];
